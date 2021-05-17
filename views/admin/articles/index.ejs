@@ -1,0 +1,54 @@
+<%- include ('../../partials/header.ejs') %>
+<%- include ('../../partials/navbar.ejs') %>
+  
+    <div class="container">
+        <h2 class="mt-4 mb-3">Artigos</h2>
+        <div class="d-flex justify-content-end">
+            <a href="/admin/articles/new" class="btn btn-success mb-3">Criar novo artigo</a>
+        </div>
+
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Título</th>
+                <th scope="col">Slug</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% articles.forEach(article => { %>
+                    <tr>
+                        <th><%= article.id %></th>
+                        <td><%= article.title %></td>
+                        <td><%= article.slug %></td>
+                        <td><%= article.category.title %></td>
+                        <td class="d-flex align-items-center">
+                            <a href="/admin/articles/edit/<%= article.id %>" class="btn btn-warning mr-2">Editar</a>
+                            
+                            <form method="post" action="/articles/delete" onsubmit="confirmarDelecao(event, this)">
+                                <input type="hidden" name="id" value="<%= article.id %>">
+                                <button type="submit" class="btn btn-danger">Deletar</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+          </table>
+    </div>
+
+<%- include ('../../partials/footer.ejs') %>
+<script>
+    function confirmarDelecao(event, form){
+        event.preventDefault();
+        let decisao = confirm("Você quer deletar este artigo?");
+
+        if(decisao){
+            form.submit();
+        }
+        else{
+            console.log("Não escolhi deletar");
+        }
+    }
+</script>

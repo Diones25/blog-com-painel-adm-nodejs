@@ -1,0 +1,38 @@
+<%- include ('partials/header.ejs') %>
+<%- include ('./partials/homenavbar.ejs') %>
+  
+<body>
+    <div class="container">
+        <div class="jumbotron mt-4">
+            <h1 class="display-4">Bem vindo!</h1>
+            <p class="lead">Este é um simples blog da CodeWebMaster.</p>
+            <hr class="my-4">
+            <p>Descrição detalhada aqui.</p>
+            <a class="btn btn-primary btn-lg" href="#" role="button">Leia mais</a>
+        </div>
+    
+        <div class="row">
+            <% articles.forEach(article => { %>
+            <div class="col-lg-4">
+                <div class="card mb-3 mt-4">
+                    <div class="card-header">
+                        <h2><%= article.title %></h2>
+                    </div>
+                    <div class="card-body">
+                        <a href="/<%= article.slug %>" class="btn btn-success">Ler artigo</a>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+        <div class="row my-4">
+            <div class="col-12 col-lg-12 d-flex justify-content-end">
+                <a href="/articles/page/2">Next >>></a>
+            </div>
+        </div>
+    </div>
+</body>
+
+<%- include ('partials/footer.ejs') %>
+
+    
